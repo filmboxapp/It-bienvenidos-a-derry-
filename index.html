@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Serie - FILMBOX</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 16px;
+    }
+
+    /* VIDEO */
+    .video-container {
+      background: #000;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+    }
+
+    iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+    }
+
+    /* INFO */
+    .info-box {
+      background: #111;
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 16px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .poster {
+      width: 100px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.1);
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .details h2 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .icons {
+      display: flex;
+      gap: 16px;
+      margin-top: 8px;
+      color: #ccc;
+      font-size: 0.9rem;
+      align-items: center;
+    }
+
+    .icon-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .icon-item svg {
+      width: 18px;
+      height: 18px;
+      fill: #e50914;
+      flex-shrink: 0;
+    }
+
+    /* CAPÍTULOS */
+    .chapters-box {
+      background: #111;
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+
+    .chapters {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      padding-bottom: 6px;
+    }
+
+    .chapter-btn {
+      background: #1c1c1c;
+      border: 1px solid #333;
+      color: #fff;
+      border-radius: 10px;
+      padding: 10px 16px;
+      min-width: 45px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      flex-shrink: 0;
+    }
+
+    .chapter-btn:hover, .chapter-btn.active {
+      background: #e50914;
+      border-color: #e50914;
+    }
+
+    /* SINOPSIS */
+    .synopsis {
+      background: #111;
+      border-radius: 16px;
+      padding: 16px;
+      margin-top: 16px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      color: #ccc;
+    }
+
+    /* SCROLLBAR personalizada */
+    .chapters::-webkit-scrollbar {
+      height: 6px;
+    }
+    .chapters::-webkit-scrollbar-thumb {
+      background: #444;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <!-- VIDEO -->
+    <div class="video-container" id="video-container">
+      <iframe id="videoPlayer" src="" allowfullscreen></iframe>
+    </div>
+
+    <!-- INFO -->
+    <div class="info-box">
+      <img src="https://image.tmdb.org/t/p/original/yNp8FqKkOpojtmqce2uRozXunct.jpg" alt="Poster" class="poster">
+      <div class="details">
+        <h2>IT:BIENVENIDOS A DERRY </h2>
+        <div class="icons">
+          <div class="icon-item">
+            <!-- Calendar (Año) -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 16H5V10h14v10ZM5 8V6h14v2H5Z"/></svg>
+            <span>2025</span>
+          </div>
+
+          <div class="icon-item">
+            <!-- Clock (Duración) -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0 2a10 10 0 1 1 0-20 10 10 0 0 1 0 20Zm.5-10V7h-1.5v6h5v-1.5Z"/></svg>
+            <span>1h/cap</span>
+          </div>
+
+          <div class="icon-item">
+            <!-- Star (Rating) -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m12 17.27 6.18 3.73-1.64-7.03L21 9.24l-7.19-.61L12 2 10.19 8.63 3 9.24l4.46 4.73L5.82 21Z"/></svg>
+            <span>8.7 </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CAPÍTULOS -->
+    <div class="chapters-box">
+      <h3>Capítulos</h3>
+      <div class="chapters" id="chapterList">
+        <div class="chapter-btn active" data-video="https://lzplayerfree.blogspot.com/?url=U2FsdGVkX19xuP3b19v0mktCLxbk86XzXM5r1nLptYL4oUSPUSC42SgvZqTW%2BsJDlcARgJ8A%2FHsd8dk7%2BiMOckRipzTZoWuY94hl9RSfqfuSX934UVGiouHkOZ%2BZndgB0RGX9YHJcAAS1qvLQ8ZXBCS2SMN1wy42zZzqLqdfU465E5HQIAxSSEqnsS279T2br3ZdjTJsqV84j9kuSXrL%2FyV8yZNzhpJGdtmjb2ubYwo4s5JPDCsTrNvSxX0bVObPnyp%2BY%2B%2F7jm%2For%2FCT4Ds6NDsH8W8uSKOb1paEaS1%2F18P%2F1Rj9t0UOsdpJau%2B4t3uH">1</div>
+        <div class="chapter-btn" data-video="">2</div>
+        <div class="chapter-btn" data-video="">3</div>
+        <div class="chapter-btn" data-video="">4</div>
+        <div class="chapter-btn" data-video="">5</div>
+        <div class="chapter-btn" data-video="">6</div>
+        <div class="chapter-btn" data-video="">7</div>
+        <div class="chapter-btn" data-video="">8</div>
+      </div>
+    </div>
+
+    <!-- SINOPSIS -->
+    <div class="synopsis">
+      Precuela de IT que comienza en la década de 1960 y que también cubre los orígenes de Pennywise el Payaso.
+    </div>
+
+  </div>
+
+  <script>
+    const chapterButtons = document.querySelectorAll('.chapter-btn');
+    const videoPlayer = document.getElementById('videoPlayer');
+
+    // Al cargar la página, establecer el primer video activo
+    const firstActive = document.querySelector('.chapter-btn.active');
+    if (firstActive) {
+      videoPlayer.src = firstActive.getAttribute('data-video');
+    } else if (chapterButtons.length > 0) {
+      videoPlayer.src = chapterButtons[0].getAttribute('data-video');
+      chapterButtons[0].classList.add('active');
+    }
+
+    // Cambiar el video sin recargar la página
+    chapterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        videoPlayer.src = btn.getAttribute('data-video');
+        chapterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
